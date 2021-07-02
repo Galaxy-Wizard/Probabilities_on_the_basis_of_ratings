@@ -346,19 +346,9 @@ void CProbabilities_calculationDlg::OnBnClickedButtonCalculate()
 
 		local_expectation = local_points_number/local_parties_number;
 
-		double local_performance = local_rating_c - 400.0*log(1.0/local_expectation - 1.0)/log(10.0);
+		double local_performance = local_rating_c + (800.0* local_expectation - 400.0);
 
-		if
-			(
-			local_performance<=local_rating_c
-			)
-		{
-			local_rating_a = local_performance;
-		}
-		else
-		{
-			local_rating_a = local_rating_c + local_factor*(local_points_number-local_parties_number*0.5);
-		}
+		local_rating_a = local_rating_c + local_factor*(local_points_number-local_parties_number*0.5);
 
 		CString local_rating_a_string;
 
