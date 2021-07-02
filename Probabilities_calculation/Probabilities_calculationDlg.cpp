@@ -349,9 +349,9 @@ void CProbabilities_calculationDlg::OnBnClickedButtonCalculate()
 		double local_linear_performance = local_rating_c + (800.0 * local_expectation - 400.0);
 		double local_true_performance = local_rating_c - (400.0 * log(1.0/local_expectation-1.0)/log(10));
 
-		double local_difference_performance = abs(local_true_performance - local_linear_performance);
+		double local_difference_performance = abs(local_true_performance - local_linear_performance) / 2.0;
 
-		double local_performance = local_true_performance;
+		double local_performance = (local_true_performance + local_linear_performance) / 2.0;
 
 		local_rating_a = local_rating_c + local_factor*(local_points_number-local_parties_number*0.5);
 
