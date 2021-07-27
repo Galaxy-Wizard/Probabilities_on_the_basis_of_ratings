@@ -52,6 +52,7 @@ public:
 	CEdit member_edit_rating_1_new;
 	CEdit member_edit_rating_2_new;
 	CEdit member_edit_player_2_rating_performance;
+	CEdit member_edit_player_2_rating_true_performance;
 	CButton member_button_expectation_value;
 	CButton member_button_expectation_value_1;
 	CButton member_button_rating;

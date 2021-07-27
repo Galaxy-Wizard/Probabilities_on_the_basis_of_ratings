@@ -80,6 +80,7 @@ void CProbabilities_calculationDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT_PLAYER_1_RATING_NEW, member_edit_rating_1_new);
 	DDX_Control(pDX, IDC_EDIT_PLAYER_2_RATING_NEW, member_edit_rating_2_new);
 	DDX_Control(pDX, IDC_EDIT_PLAYER_2_RATING_RATING_PERFORMANCE, member_edit_player_2_rating_performance);
+	DDX_Control(pDX, IDC_EDIT_PLAYER_2_RATING_RATING_TRUE_PERFORMANCE, member_edit_player_2_rating_true_performance);
 	DDX_Control(pDX, IDC_RADIO_FIDE, member_button_expectation_value);
 	DDX_Control(pDX, IDC_RADIO_ALTERNATIVE, member_button_expectation_value_1);
 	DDX_Control(pDX, IDC_RADIO_RATING_200, member_button_rating);
@@ -371,6 +372,9 @@ void CProbabilities_calculationDlg::OnBnClickedButtonCalculate()
 		local_rating_performance_string.Format(L"%.4f", local_performance);
 
 		member_edit_player_2_rating_performance.SetWindowTextW(local_rating_performance_string);
+
+		local_rating_performance_string.Format(L"%.4f", local_true_performance);
+		member_edit_player_2_rating_true_performance.SetWindowTextW(local_rating_performance_string);
 
 
 		double local_points_per_cent_2 = local_expectation*100;
