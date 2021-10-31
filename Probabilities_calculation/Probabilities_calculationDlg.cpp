@@ -650,10 +650,10 @@ void CProbabilities_calculationDlg::OnBnClickedButtonCalculate()
 	CString local_rating_1_new_string;
 	CString local_rating_2_new_string;
 
-	double bayes_add = local_1200 / local_factor;
+	double bayes_add = 16;
 
-	double local_rating_1_new = local_rating_1 + bayes_add + local_factor*(local_party_result-(local_percent_1 + local_percent_0/2.0)/100.0);
-	double local_rating_2_new = local_rating_2 - bayes_add + local_factor*((1-local_party_result)-(local_percent_2 + local_percent_0/2.0)/100.0);
+	double local_rating_1_new = local_rating_1 - bayes_add + local_factor*(local_party_result-(local_percent_1 + local_percent_0/2.0)/100.0);
+	double local_rating_2_new = local_rating_2 + bayes_add + local_factor*((1-local_party_result)-(local_percent_2 + local_percent_0/2.0)/100.0);
 
 	local_rating_1_new_string.Format(L"%.2f",local_rating_1_new);
 	local_rating_2_new_string.Format(L"%.2f",local_rating_2_new);
