@@ -88,6 +88,7 @@ void CProbabilities_calculationDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_RADIO_RATING_ENTER, member_button_rating_2);
 	DDX_Control(pDX, IDC_CHECK_CALCULATE_INITIAL_RATING_OF_PLAYER_2, member_calculate_initial_rating_2);
 	DDX_Control(pDX, IDC_STATIC_INFORMATION, member_static_information);
+	DDX_Control(pDX, IDC_CHECK_USE_BAYES, member_check_use_bayes);
 }
 
 BEGIN_MESSAGE_MAP(CProbabilities_calculationDlg, CDialogEx)
@@ -651,6 +652,11 @@ void CProbabilities_calculationDlg::OnBnClickedButtonCalculate()
 	CString local_rating_2_new_string;
 
 	double bayes_add = 16;
+
+	if (member_check_use_bayes.GetState() == 0)
+	{
+		bayes_add = 0;
+	}
 
 	double local_rating_1_new = local_rating_1 - bayes_add + local_factor*(local_party_result-(local_percent_1 + local_percent_0/2.0)/100.0);
 	double local_rating_2_new = local_rating_2 + bayes_add + local_factor*((1-local_party_result)-(local_percent_2 + local_percent_0/2.0)/100.0);

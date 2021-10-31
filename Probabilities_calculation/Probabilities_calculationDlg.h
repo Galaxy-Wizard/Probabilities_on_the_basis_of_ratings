@@ -71,4 +71,5 @@ public:
 	afx_msg void OnBnClickedRadioAlternative();
 	afx_msg void OnBnClickedCheckCalculateInitialRatingOfPlayer2();
 	CStatic member_static_information;
+	CButton member_check_use_bayes;
 };
