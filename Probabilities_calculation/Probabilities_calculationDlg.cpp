@@ -89,6 +89,7 @@ void CProbabilities_calculationDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CHECK_CALCULATE_INITIAL_RATING_OF_PLAYER_2, member_calculate_initial_rating_2);
 	DDX_Control(pDX, IDC_STATIC_INFORMATION, member_static_information);
 	DDX_Control(pDX, IDC_CHECK_USE_BAYES, member_check_use_bayes);
+	DDX_Control(pDX, IDC_EDIT_PLAYER_2_RATING_RATING_LOGISTIC_PERFORMANCE2, member_edit_player_2_rating_logistic_performance);
 }
 
 BEGIN_MESSAGE_MAP(CProbabilities_calculationDlg, CDialogEx)

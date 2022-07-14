@@ -53,6 +53,7 @@ public:
 	CEdit member_edit_rating_2_new;
 	CEdit member_edit_player_2_rating_performance;
 	CEdit member_edit_player_2_rating_true_performance;
+	CEdit member_edit_player_2_rating_logistic_performance;
 	CButton member_button_expectation_value;
 	CButton member_button_expectation_value_1;
 	CButton member_button_rating;
@@ -60,6 +61,8 @@ public:
 	CButton member_button_rating_2;
 	CButton member_calculate_initial_rating_2;
 
+	CStatic member_static_information;
+	CButton member_check_use_bayes;
 	CEdit member_edit_k;
 
 	afx_msg void OnBnClickedOk();
@@ -70,6 +73,5 @@ public:
 	afx_msg void OnBnClickedRadioFide();
 	afx_msg void OnBnClickedRadioAlternative();
 	afx_msg void OnBnClickedCheckCalculateInitialRatingOfPlayer2();
-	CStatic member_static_information;
-	CButton member_check_use_bayes;
+	
 };
