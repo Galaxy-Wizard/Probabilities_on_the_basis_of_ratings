@@ -38,7 +38,6 @@ public:
 	CEdit member_edit_rating_2;
 	CEdit member_edit_points_number;
 	CEdit member_edit_parties_number;
-	CEdit member_edit_accuracy_percent;
 	CEdit member_edit_win_1_per_cent;
 	CEdit member_edit_win_2_per_cent;
 	CEdit member_edit_draw_per_cent;

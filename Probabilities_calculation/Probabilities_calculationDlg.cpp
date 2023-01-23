@@ -66,7 +66,6 @@ void CProbabilities_calculationDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT_PLAYER_2_RATING, member_edit_rating_2);
 	DDX_Control(pDX, IDC_EDIT_POINTS_NUMBER, member_edit_points_number);
 	DDX_Control(pDX, IDC_EDIT_PARTIES_NUMBER, member_edit_parties_number);
-	DDX_Control(pDX, IDC_EDIT_ACCURACY_PER_CENT, member_edit_accuracy_percent);
 	DDX_Control(pDX, IDC_EDIT_PLAYER_1_WIN_PER_CENT, member_edit_win_1_per_cent);
 	DDX_Control(pDX, IDC_EDIT_PLAYER_2_WIN_PER_CENT, member_edit_win_2_per_cent);
 	DDX_Control(pDX, IDC_EDIT_DRAW_PER_CENT, member_edit_draw_per_cent);
@@ -156,6 +155,8 @@ BOOL CProbabilities_calculationDlg::OnInitDialog()
 
 	member_static_information.SetWindowTextW(CString(L"1) При рассчёте начального рейтинга:\r\nМножитель равен интервалу достоверности делённому на количество партий.\r\n\r\n2) При рассчёте приращений рейтингов:\r\nМножитель равен интервалу достоверности делённому на количество ходов в партии.\r\n\r\nИнтервалом достоверности называется сила Ладьи в пунктах рейтинга Байеса (1200 пунктов)."));
 
+	SetWindowTextW(CString(L"Вычисление вероятностей результата матчей"));
+
 	UpdateData(FALSE);
 
 	return TRUE;  // возврат значения TRUE, если фокус не передан элементу управления
@@ -238,7 +239,6 @@ void CProbabilities_calculationDlg::OnBnClickedButtonCalculate()
 	int member_edit_rating_2_text_length = member_edit_rating_2.GetWindowTextLengthW();
 	int member_edit_points_number_length = member_edit_points_number.GetWindowTextLengthW();
 	int member_edit_parties_number_text_length = member_edit_parties_number.GetWindowTextLengthW();
-	int member_edit_accuracy_percent_text_length = member_edit_accuracy_percent.GetWindowTextLengthW();
 	int member_edit_party_result_text_length = member_edit_party_result.GetWindowTextLengthW();
 	int member_edit_factor_text_length = member_edit_factor.GetWindowTextLengthW();
 	int member_edit_rating_enter_length = member_edit_rating_enter.GetWindowTextLengthW();
@@ -275,22 +275,6 @@ void CProbabilities_calculationDlg::OnBnClickedButtonCalculate()
 			)
 			||
 			member_edit_parties_number_text_length==0
-			||
-			(
-				member_edit_accuracy_percent_text_length==0
-				&&
-				(
-					member_calculate_initial_rating_2_is_enabled==FALSE
-					||
-					(
-						member_calculate_initial_rating_2_is_enabled==TRUE
-						&&
-						member_calculate_initial_rating_2_is_checked==0
-					)
-				)
-				&&
-				member_expectation_value_type!=0
-			)
 			||
 			(
 				member_edit_rating_enter_length==0
@@ -352,10 +336,11 @@ void CProbabilities_calculationDlg::OnBnClickedButtonCalculate()
 		double local_linear_500_performance = local_rating_c + (1000.0 * local_expectation - 500.0);	//	lichess formula
 		double local_linear_400_performance = local_rating_c + (800.0 * local_expectation - 400.0);
 		double local_true_performance = local_rating_c - (400.0 * log(1.0/local_expectation-1.0)/log(10));
+		double local_logistic_performance = local_rating_c - (400.0 * log(1.0 / local_expectation - 1.0) / log(10));
 
 		double local_linear_performance = local_linear_500_performance;
 
-		double local_difference_performance = abs(local_true_performance - local_linear_performance) / 2.0;
+		double local_difference_performance = abs(local_logistic_performance - local_linear_performance) / 2.0;
 
 		//double local_performance = (local_true_performance + local_linear_performance) / 2.0;
 		double local_performance = local_linear_performance;
@@ -378,6 +363,8 @@ void CProbabilities_calculationDlg::OnBnClickedButtonCalculate()
 		local_rating_performance_string.Format(L"%.4f", local_true_performance);
 		member_edit_player_2_rating_true_performance.SetWindowTextW(local_rating_performance_string);
 
+		//local_rating_performance_string.Format(L"%.4f", local_logistic_performance);
+	//member_edit_player_2_rating_logistic_performance.SetWindowTextW(local_rating_performance_string);
 
 		double local_points_per_cent_2 = local_expectation*100;
 		double local_points_per_cent_1 = 100.0 - local_points_per_cent_2;
@@ -452,11 +439,6 @@ void CProbabilities_calculationDlg::OnBnClickedButtonCalculate()
 	local_parties_number = _wtof(local_parties_number_string);
 	
 	double local_accuracy_per_cent = 1.0;
-
-	CString local_accuracy_per_cent_string;
-
-	member_edit_accuracy_percent.GetWindowTextW(local_accuracy_per_cent_string);
-	local_accuracy_per_cent = _wtof(local_accuracy_per_cent_string);
 
 
 
